@@ -34,4 +34,14 @@ class BudgetTest extends TestCase
 
         $response->assertSessionHasErrors('name');
     }
+
+    public function test_a_description_is_required() 
+    {
+        $response = $this->post('new-budget', [
+            'name' => 'test-budget',
+            'description' => ''
+        ]);
+
+        $response->assertSessionHasErrors('name');
+    }
 }
