@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Controllers\BudgetController;
 use App\Models\Budget;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -11,14 +12,16 @@ class BudgetTest extends TestCase
 {
     use RefreshDatabase;
 
+    const BASIC_ADD_REQUEST = [
+        'name' => 'Test Budget',
+        'description' => 'This is a test budget, used for testing'
+    ];
+
     public function test_a_budget_can_be_created()
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->post('new-budget', [
-            'name' => 'test-budget',
-            'description' => 'this is a test budget, for testing'
-        ]);
+        $response = $this->post(BudgetController::ADD_URL, self::BASIC_ADD_REQUEST);
 
         $response->assertOk();
 
@@ -27,21 +30,21 @@ class BudgetTest extends TestCase
 
     public function test_a_name_is_required() 
     {
-        $response = $this->post('new-budget', [
-            'name' => '',
-            'description' => 'this is a test budget, for testing'
-        ]);
-
-        $response->assertSessionHasErrors('name');
+        $this->test_requirement('name');
     }
 
     public function test_a_description_is_required() 
     {
-        $response = $this->post('new-budget', [
-            'name' => 'test-budget',
-            'description' => ''
-        ]);
+        $this->test_requirement('description');
+    }
 
-        $response->assertSessionHasErrors('description');
+    private function test_requirement(string $requirement)
+    {
+        $request = self::BASIC_ADD_REQUEST;
+        $request[$requirement] = null;
+
+        $response = $this->post(BudgetController::ADD_URL, $request);
+
+        $response->assertSessionHasErrors($requirement);
     }
 }
