@@ -9,6 +9,10 @@ class BudgetController extends Controller
 {
     public function create()
     {
+        $data = request()->validate([
+            'name' => 'required'
+        ]);
+
         Budget::create([
             'name' => request('name'),
             'description' => request('description')
