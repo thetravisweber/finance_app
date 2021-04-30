@@ -42,6 +42,6 @@ class BudgetTest extends TestCase
             'description' => ''
         ]);
 
-        $response->assertSessionHasErrors('name');
+        $response->assertSessionHasErrors('description');
     }
 }
