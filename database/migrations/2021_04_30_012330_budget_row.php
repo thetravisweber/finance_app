@@ -15,7 +15,7 @@ class BudgetRow extends Migration
     {
         Schema::create('budget_row', function (Blueprint $table) {
             $table->id();
-            $table->timestamp();
+            $table->timestamps();
             $table->foreignId('budget_id');
         });
     }
