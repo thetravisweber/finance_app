@@ -15,7 +15,7 @@ class BudgetTest extends TestCase
      */
     public function test_a_budget_can_be_created()
     {
-        // $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
 
         $response = $this->post('new-budget', [
             'name' => 'test-budget',
