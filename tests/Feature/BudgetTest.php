@@ -2,17 +2,15 @@
 
 namespace Tests\Feature;
 
+use App\Models\Budget;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 
 class BudgetTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
+    use RefreshDatabase;
+
     public function test_a_budget_can_be_created()
     {
         $this->withoutExceptionHandling();
@@ -24,6 +22,6 @@ class BudgetTest extends TestCase
 
         $response->assertOk();
 
-        // $this->assertCount(1, Budget::all());
+        $this->assertCount(1, Budget::all());
     }
 }

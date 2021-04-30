@@ -16,7 +16,7 @@ class CreateBudgetEntriesTable extends Migration
         Schema::create('budget_entries', function (Blueprint $table) {
             $table->id();
             $table->string('field');
-            $table->int('value');
+            $table->integer('value');
             $table->foreignId('row_id');
         });
     }
