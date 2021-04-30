@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBudgetTable extends Migration
+class BudgetRow extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateBudgetTable extends Migration
      */
     public function up()
     {
-        Schema::create('budget', function (Blueprint $table) {
+        Schema::create('budget_row', function (Blueprint $table) {
             $table->id();
             $table->timestamp();
-            $table->string('name');
-            $table->string('description');
-            $table->enum('status', ['active', 'inactive']);
+            $table->foreignId('budget_id');
         });
     }
 
@@ -29,6 +27,6 @@ class CreateBudgetTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('budget');
+        //
     }
 }
