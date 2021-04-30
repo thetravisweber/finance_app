@@ -10,4 +10,11 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    const API_DIRECTORY = 'default';
+
+    public static function addUrl()
+    {
+        return static::API_DIRECTORY . '/add';
+    }
 }

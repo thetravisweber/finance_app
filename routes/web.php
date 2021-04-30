@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post(BudgetController::ADD_URL, [BudgetController::class, 'create']);
+Route::post(BudgetController::addUrl(), [BudgetController::class, 'create']);

@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class BudgetController extends Controller
 {
-    const ADD_URL = 'new-budget';
+
+    const API_DIRECTORY = 'budget';
 
     public function create()
     {
