@@ -24,4 +24,16 @@ class BudgetTest extends TestCase
 
         $this->assertCount(1, Budget::all());
     }
+
+    public function test_a_name_is_required() 
+    {
+        $this->withoutExceptionHandling();
+
+        $response = $this->post('new-budget', [
+            'name' => '',
+            'description' => 'this is a test budget, for testing'
+        ]);
+
+        $response->assertSessionHasErrors('name');
+    }
 }
