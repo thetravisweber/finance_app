@@ -48,11 +48,11 @@ class BudgetTest extends TestCase
 
         $first = Budget::first();
 
-        $this->assertCount(0, $first->getGoals());
+        $response = $this->post("budget/$first->id/add-goal", self::BASIC_ADD_REQUEST);
 
-        $this->post("budget/$first->id/add-goal", self::BASIC_ADD_REQUEST);
+        $response->assertOk();
 
-        $this->assertCount(1, $first->getGoals());
+        $this->assertCount(1, BudgetRow::all());
     }
 
 
