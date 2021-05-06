@@ -19,4 +19,12 @@ class BudgetController extends Controller
 
         Budget::create($data);
     }
+
+    public function setGoal(int $budgetId)
+    {
+        $budget = new Budget($budgetId);
+
+        return $budget->setGoal(request()->all());
+    }
+
 }

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\BudgetRow;
 
 class CreateBudgetRowsTable extends Migration
 {
@@ -13,7 +14,7 @@ class CreateBudgetRowsTable extends Migration
      */
     public function up()
     {
-        Schema::create('budget_row', function (Blueprint $table) {
+        Schema::create(BudgetRow::TABLE_NAME, function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->foreignId('budget_id');
@@ -27,6 +28,6 @@ class CreateBudgetRowsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('budget');
+        Schema::dropIfExists(BudgetRow::TABLE_NAME);
     }
 }
