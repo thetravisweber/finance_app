@@ -16,4 +16,9 @@ class Budget extends Model
         'description'
     ];
 
+    public function setGoal(array $data)
+    {
+        $goalRow = new BudgetRow(['budget_id' => $this->id]);
+    }
+
 }

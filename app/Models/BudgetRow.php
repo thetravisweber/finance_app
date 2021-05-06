@@ -9,8 +9,7 @@ class BudgetRow extends Model
 
     const TABLE_NAME = 'budget_rows';
 
-    public function __construct()
-    {
-        return 'hey';
-    }
+    protected $fillable = [
+        'budget_id'
+    ];
 }
