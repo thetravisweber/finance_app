@@ -89,7 +89,7 @@ class BudgetTest extends TestCase
 
         $this->assertNotEmpty($responseData);
 
-        // $this->assertEquals($addRequest, $responseData);
+        $this->assertEquals($addRequest, $responseData);
     }
 
 
