@@ -60,7 +60,7 @@ class BudgetTest extends TestCase
 
         $response->assertOk();
 
-        // $this->assertCount(1, BudgetRow::all());
+        $this->assertCount(1, BudgetRow::all());
     }
 
 
