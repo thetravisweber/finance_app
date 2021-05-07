@@ -100,6 +100,27 @@ class BudgetTest extends TestCase
         $this->assertCount(count($request), BudgetEntry::all());
     }
 
+    public function test_get_goal_route_is_ok()
+    {
+        $response = $this->post(self::ADD_URL, self::BASIC_ADD_REQUEST);
+
+        $response->assertOk();
+
+        $first = Budget::first();
+
+        $addRequest = [
+            'food' => 50,
+            'fun' => 25,
+            'Vacation Savings' => 10
+        ];
+
+        $this->post("budget/$first->id/set-goal", $addRequest);
+
+        $response = $this->get("budget/$first->id/get-goal");
+
+        $response->assertOk();
+    }
+
     public function test_a_set_goal_is_accurate()
     {
         $response = $this->post(self::ADD_URL, self::BASIC_ADD_REQUEST);

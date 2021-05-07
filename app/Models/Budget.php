@@ -25,10 +25,7 @@ class Budget extends Model
 
     public function getGoal()
     {
-        return [
-            'hows_it' => 'good'
-        ];
-        return BudgetRow::getGoalForBudget($this->id);
+        $goalRow = new BudgetRow($this->id);
     }
 
 }
