@@ -24,6 +24,15 @@ class BudgetRow extends Model
 
     public function enter($data)
     {
-        return 'not doing much yet';
+        $insertData = [];
+        foreach ($data as $key => $val) {
+            $insertData[] = [
+                'field' => $key,
+                'value' => $val,
+                'row_id' => $this->id
+            ];
+        }
+
+        BudgetEntry::insert($insertData);
     }
 }
