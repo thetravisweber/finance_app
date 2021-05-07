@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Budget;
+use App\Models\BudgetEntry;
 use App\Models\BudgetRow;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -40,10 +41,25 @@ class BudgetTest extends TestCase
         $this->test_requirement('description');
     }
 
+    public function test_a_budget_goal_set_is_ok()
+    {
+        $response = $this->post(self::ADD_URL, self::BASIC_ADD_REQUEST);
+
+        $first = Budget::first();
+
+        $request = [
+            'food' => 50,
+            'fun' => 25,
+            'Vacation Savings' => 10
+        ];
+
+        $response = $this->post("budget/$first->id/set-goal", $request);
+
+        $response->assertOk();
+    }
+
     public function test_a_budget_row_is_created_when_a_budget_goal_is_set()
     {
-        $this->withoutExceptionHandling();
-
         $response = $this->post(self::ADD_URL, self::BASIC_ADD_REQUEST);
 
         $response->assertOk();
@@ -63,10 +79,29 @@ class BudgetTest extends TestCase
         $this->assertCount(1, BudgetRow::all());
     }
 
+    public function test_budget_entries_are_created_when_a_goal_is_set()
+    {
+        $response = $this->post(self::ADD_URL, self::BASIC_ADD_REQUEST);
+
+        $response->assertOk();
+
+        $first = Budget::first();
+
+        $request = [
+            'food' => 50,
+            'fun' => 25,
+            'Vacation Savings' => 10
+        ];
+
+        $response = $this->post("budget/$first->id/set-goal", $request);
+
+        $response->assertOk();
+
+        $this->assertCount(count($request), BudgetEntry::all());
+    }
+
     public function test_a_set_goal_is_accurate()
     {
-        $this->withoutExceptionHandling();
-
         $response = $this->post(self::ADD_URL, self::BASIC_ADD_REQUEST);
 
         $response->assertOk();
