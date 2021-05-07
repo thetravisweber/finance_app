@@ -40,7 +40,7 @@ class BudgetTest extends TestCase
         $this->test_requirement('description');
     }
 
-    public function test_a_goal_can_be_set()
+    public function test_a_budget_row_is_created_when_a_budget_goal_is_set()
     {
         $this->withoutExceptionHandling();
 
@@ -61,6 +61,35 @@ class BudgetTest extends TestCase
         $response->assertOk();
 
         $this->assertCount(1, BudgetRow::all());
+    }
+
+    public function test_a_set_goal_is_accurate()
+    {
+        $this->withoutExceptionHandling();
+
+        $response = $this->post(self::ADD_URL, self::BASIC_ADD_REQUEST);
+
+        $response->assertOk();
+
+        $first = Budget::first();
+
+        $addRequest = [
+            'food' => 50,
+            'fun' => 25,
+            'Vacation Savings' => 10
+        ];
+
+        $this->post("budget/$first->id/set-goal", $addRequest);
+
+        $response = $this->get("budget/$first->id/get-goal");
+
+        $response->assertOk();
+
+        // $responseData = json_decode($response->content());
+
+        // $this->assertNotEmpty($response);
+
+        // $this->assertEquals($addRequest, json_decode($response->content()));
     }
 
 
