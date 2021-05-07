@@ -20,7 +20,7 @@ class Budget extends Model
     {
         $goalRow = BudgetRow::create(['budget_id' => $this->id, 'is_goal' => true]);
 
-        return 'succ';
+        $goalRow->enter($data);
     }
 
     public function getGoal()

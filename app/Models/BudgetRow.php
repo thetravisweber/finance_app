@@ -21,4 +21,9 @@ class BudgetRow extends Model
                     ->where('is_deleted', false)
                     ->first();
     }
+
+    public function enter($data)
+    {
+        return 'not doing much yet';
+    }
 }
