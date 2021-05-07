@@ -18,7 +18,7 @@ class Budget extends Model
 
     public function setGoal(array $data)
     {
-        $goalRow = new BudgetRow(['budget_id' => $this->id]);
+        $goalRow = BudgetRow::create(['budget_id' => $this->id]);
     }
 
 }
