@@ -25,7 +25,9 @@ class Budget extends Model
 
     public function getGoal()
     {
-        return 'ye';
+        return [
+            'hows_it' => 'good'
+        ];
         return BudgetRow::getGoalForBudget($this->id);
     }
 
