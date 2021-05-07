@@ -27,4 +27,11 @@ class BudgetController extends Controller
         return $budget->setGoal(request()->all());
     }
 
+    public function getGoal(int $budgetId)
+    {
+        $budget = new Budget($budgetId);
+
+        return $budget->getGoal();
+    }
+
 }

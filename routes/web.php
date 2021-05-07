@@ -20,3 +20,7 @@ Route::get('/', function () {
 
 Route::post(BudgetController::addUrl(), [BudgetController::class, 'create']);
 Route::post(BudgetController::API_DIRECTORY . '/{budget_id}/set-goal', [BudgetController::class, 'setGoal']);
+
+
+
+Route::get(BudgetController::API_DIRECTORY . '/{budget_id}/get-goal', [BudgetController::class, 'getGoal']);
