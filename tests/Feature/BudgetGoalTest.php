@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 
-class BudgetRowTest extends TestCase
+class BudgetGoalTest extends TestCase
 {
 
     use RefreshDatabase;
