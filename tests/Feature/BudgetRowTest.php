@@ -14,7 +14,7 @@ class BudgetRowTest extends TestCase
 
     use RefreshDatabase;
 
-    public function test_a_budget_row_set_is_ok()
+    public function test_add_a_budget_row_is_ok()
     {
         $response = $this->post(BudgetTest::ADD_URL, BudgetTest::BASIC_ADD_REQUEST);
 
@@ -31,26 +31,24 @@ class BudgetRowTest extends TestCase
         $response->assertOk();
     }
 
-    // public function test_a_budget_row_is_created_when_a_budget_row_is_set()
-    // {
-    //     $response = $this->post(BudgetTest::ADD_URL, BudgetTest::BASIC_ADD_REQUEST);
+    public function test_a_budget_row_is_created_when_a_budget_row_is_set()
+    {
+        $response = $this->post(BudgetTest::ADD_URL, BudgetTest::BASIC_ADD_REQUEST);
 
-    //     $response->assertOk();
+        $response->assertOk();
 
-    //     $first = Budget::first();
+        $first = Budget::first();
 
-    //     $request = [
-    //         'food' => 50,
-    //         'fun' => 25,
-    //         'Vacation Savings' => 10
-    //     ];
+        $request = [
+            'food' => 50,
+            'fun' => 25,
+            'Vacation Savings' => 10
+        ];
 
-    //     $response = $this->post("budget/$first->id/set-row", $request);
+        $response = $this->post("budget/$first->id/add-row", $request);
 
-    //     $response->assertOk();
-
-    //     $this->assertCount(1, BudgetRow::all());
-    // }
+        $this->assertCount(1, BudgetRow::all());
+    }
 
     // public function test_budget_entries_are_created_when_a_row_is_set()
     // {
@@ -66,7 +64,7 @@ class BudgetRowTest extends TestCase
     //         'Vacation Savings' => 10
     //     ];
 
-    //     $response = $this->post("budget/$first->id/set-row", $request);
+    //     $response = $this->post("budget/$first->id/add-row", $request);
 
     //     $response->assertOk();
 
@@ -87,7 +85,7 @@ class BudgetRowTest extends TestCase
     //         'Vacation Savings' => 10
     //     ];
 
-    //     $this->post("budget/$first->id/set-row", $addRequest);
+    //     $this->post("budget/$first->id/add-row", $addRequest);
 
     //     $response = $this->get("budget/$first->id/get-row");
 
@@ -108,7 +106,7 @@ class BudgetRowTest extends TestCase
     //         'Vacation Savings' => 10
     //     ];
 
-    //     $this->post("budget/$first->id/set-row", $addRequest);
+    //     $this->post("budget/$first->id/add-row", $addRequest);
 
     //     $response = $this->get("budget/$first->id/get-row");
 
@@ -131,7 +129,7 @@ class BudgetRowTest extends TestCase
     //         'Vacation Savings' => 10
     //     ];
 
-    //     $this->post("budget/$first->id/set-row", $addRequest);
+    //     $this->post("budget/$first->id/add-row", $addRequest);
 
     //     $response = $this->get("budget/$first->id/get-row");
 
