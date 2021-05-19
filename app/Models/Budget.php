@@ -18,9 +18,7 @@ class Budget extends Model
 
     public function setGoal(array $data)
     {
-        $goalRow = BudgetRow::create(['budget_id' => $this->id, 'is_goal' => true]);
-
-        $goalRow->enter($data);
+        $this->addRow($data, true);
     }
 
     public function getGoal()
@@ -30,9 +28,9 @@ class Budget extends Model
         return $goalRow->getFormattedEntries();
     }
 
-    public function addRow(array $data)
+    public function addRow(array $data, bool $isGoal = false)
     {
-        $row = BudgetRow::create(['budget_id' => $this->id]);
+        $row = BudgetRow::create(['budget_id' => $this->id, 'is_goal' => $isGoal]);
 
         return $row->enter($data);
     }
