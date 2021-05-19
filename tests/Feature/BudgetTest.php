@@ -164,7 +164,7 @@ class BudgetTest extends TestCase
 
         $responseData = json_decode($response->content());
 
-        $this->assertEquals($addRequest, $responseData);
+        $this->assertEquals($addRequest, (array) $responseData);
     }
 
 

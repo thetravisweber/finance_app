@@ -29,10 +29,36 @@ class BudgetRow extends Model
             $insertData[] = [
                 'field' => $key,
                 'value' => $val,
-                'row_id' => $this->id
+                'budget_row_id' => $this->id
             ];
         }
 
         BudgetEntry::insert($insertData);
     }
+    
+    public function getSummary()
+    {
+        return [
+            'meta_data' => $this->get(),
+            'entries'  => $this->getFormattedEntries()
+        ];
+    }
+
+    public function getFormattedEntries()
+    {
+        $results = [];
+        foreach ($this->rows as $row) {
+            $results[$row['field']] = $row['value'];
+        }
+        return $results;
+    }
+
+
+
+    // used to describe relationship for Eloquent ORM
+    public function rows() 
+    {
+        return $this->hasMany(BudgetEntry::class);
+    }
+
 }
