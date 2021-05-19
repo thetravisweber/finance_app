@@ -27,10 +27,7 @@ class Budget extends Model
     {
         $goalRow = new BudgetRow($this->id);
 
-        return [
-            'meta' => $goalRow->is_goal,
-            'data' => $goalRow->rows
-        ];
+        return $goalRow->getFormattedEntries();
     }
 
 }
