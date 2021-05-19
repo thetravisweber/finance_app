@@ -166,7 +166,7 @@ class BudgetTest extends TestCase
 
         pretty_print($responseData);
 
-        $this->assertEquals($addRequest, $responseData);
+        $this->assertEquals($addRequest, (array) $responseData);
     }
 
 
