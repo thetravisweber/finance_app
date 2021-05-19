@@ -27,7 +27,10 @@ class Budget extends Model
     {
         $goalRow = new BudgetRow($this->id);
 
-        return $goalRow->get();
+        return [
+            'meta' => $goalRow->is_goal,
+            'data' => $goalRow->rows
+        ];
     }
 
 }

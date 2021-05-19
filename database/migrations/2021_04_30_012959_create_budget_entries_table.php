@@ -17,7 +17,7 @@ class CreateBudgetEntriesTable extends Migration
             $table->id();
             $table->string('field');
             $table->integer('value');
-            $table->foreignId('row_id');
+            $table->foreignId('budget_row_id');
         });
     }
 
