@@ -26,6 +26,8 @@ class Budget extends Model
     public function getGoal()
     {
         $goalRow = new BudgetRow($this->id);
+
+        return $goalRow->get();
     }
 
 }

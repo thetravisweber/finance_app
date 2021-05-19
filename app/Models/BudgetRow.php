@@ -35,4 +35,11 @@ class BudgetRow extends Model
 
         BudgetEntry::insert($insertData);
     }
+
+    public function get() {
+        if ($this->is_goal) {
+            return 'I am a goal';
+        }
+        return 'I am not a goal';
+    }
 }
