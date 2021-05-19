@@ -18,9 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/* SETTERS */
 Route::post(BudgetController::addUrl(), [BudgetController::class, 'create']);
 Route::post(BudgetController::API_DIRECTORY . '/{budget_id}/set-goal', [BudgetController::class, 'setGoal']);
+Route::post(BudgetController::API_DIRECTORY . '/{budget_id}/add-row', [BudgetController::class, 'addRow']);
 
 
-
+/* GETTERS */
 Route::get(BudgetController::API_DIRECTORY . '/{budget_id}/get-goal', [BudgetController::class, 'getGoal']);

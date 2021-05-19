@@ -34,4 +34,9 @@ class BudgetController extends Controller
         return $budget->getGoal();
     }
 
+    public function addRow(int $budgetId)
+    {
+        return 'yep I definitely just added that';
+    }
+
 }
