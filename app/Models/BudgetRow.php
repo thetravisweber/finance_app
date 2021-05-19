@@ -29,17 +29,14 @@ class BudgetRow extends Model
             $insertData[] = [
                 'field' => $key,
                 'value' => $val,
-                'row_id' => $this->id
+                'budget_row_id' => $this->id
             ];
         }
 
         BudgetEntry::insert($insertData);
     }
 
-    public function get() {
-        if ($this->is_goal) {
-            return 'I am a goal';
-        }
-        return 'I am not a goal';
+    public function rows() {
+        return $this->hasMany(BudgetEntry::class);
     }
 }
