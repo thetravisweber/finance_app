@@ -18,7 +18,7 @@ class CreateBudgetRowsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('budget_id');
-            $table->boolean('is_goal');
+            $table->boolean('is_goal')->default(false);
             $table->boolean('is_deleted')->default(false);
         });
     }

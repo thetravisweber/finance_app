@@ -36,7 +36,9 @@ class BudgetController extends Controller
 
     public function addRow(int $budgetId)
     {
-        return 'yep I definitely just added that';
+        $budget = new Budget($budgetId);
+
+        return $budget->addRow(request()->all());
     }
 
 }

@@ -30,4 +30,11 @@ class Budget extends Model
         return $goalRow->getFormattedEntries();
     }
 
+    public function addRow(array $data)
+    {
+        $row = BudgetRow::create(['budget_id' => $this->id]);
+
+        return $row->enter($data);
+    }
+
 }
