@@ -37,7 +37,7 @@ class Budget extends Model
 
     public function listRows()
     {
-        return 'heyo';
+        return ['heyo'];
     }
 
 }

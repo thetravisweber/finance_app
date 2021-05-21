@@ -41,7 +41,6 @@ class BudgetController extends Controller
     /***
      *  GETTERS
      */
-
     public function getGoal(int $budgetId)
     {
         $budget = new Budget($budgetId);

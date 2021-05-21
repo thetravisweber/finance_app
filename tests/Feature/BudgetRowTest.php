@@ -31,7 +31,7 @@ class BudgetRowTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_a_budget_row_is_created_when_a_budget_row_is_set()
+    public function test_a_budget_row_is_created_when_a_budget_row_is_added()
     {
         $response = $this->post(BudgetTest::ADD_URL, BudgetTest::BASIC_ADD_REQUEST);
 
@@ -50,7 +50,7 @@ class BudgetRowTest extends TestCase
         $this->assertCount(1, BudgetRow::all());
     }
 
-    public function test_budget_entries_are_created_when_a_row_is_set()
+    public function test_budget_entries_are_created_when_a_row_is_added()
     {
         $response = $this->post(BudgetTest::ADD_URL, BudgetTest::BASIC_ADD_REQUEST);
 
@@ -71,7 +71,7 @@ class BudgetRowTest extends TestCase
         $this->assertCount(count($request), BudgetEntry::all());
     }
 
-    public function test_get_row_route_is_ok()
+    public function test_list_rows_route_is_ok()
     {
         $response = $this->post(BudgetTest::ADD_URL, BudgetTest::BASIC_ADD_REQUEST);
 
@@ -92,50 +92,51 @@ class BudgetRowTest extends TestCase
         $response->assertOk();
     }
 
-    // public function test_get_row_is_not_empty()
-    // {
-    //     $response = $this->post(BudgetTest::ADD_URL, BudgetTest::BASIC_ADD_REQUEST);
+    public function test_list_rows_is_not_empty_array()
+    {
+        $response = $this->post(BudgetTest::ADD_URL, BudgetTest::BASIC_ADD_REQUEST);
 
-    //     $response->assertOk();
+        $first = Budget::first();
 
-    //     $first = Budget::first();
+        $addRequest = [
+            'food' => 50,
+            'fun' => 25,
+            'Vacation Savings' => 10
+        ];
 
-    //     $addRequest = [
-    //         'food' => 50,
-    //         'fun' => 25,
-    //         'Vacation Savings' => 10
-    //     ];
+        $this->post("budget/$first->id/add-row", $addRequest);
 
-    //     $this->post("budget/$first->id/add-row", $addRequest);
+        $response = $this->get("budget/$first->id/list-rows");
 
-    //     $response = $this->get("budget/$first->id/get-row");
+        $responseData = json_decode($response->content());
 
-    //     $responseData = json_decode($response->content());
+        $this->assertNotEmpty($responseData);
+        $this->assertIsArray($responseData);
+    }
 
-    //     $this->assertNotEmpty($responseData);
-    // }
+    public function test_added_row_is_accurate()
+    {
+        $response = $this->post(BudgetTest::ADD_URL, BudgetTest::BASIC_ADD_REQUEST);
 
-    // public function test_row_is_accurate()
-    // {
-    //     $response = $this->post(BudgetTest::ADD_URL, BudgetTest::BASIC_ADD_REQUEST);
+        $response->assertOk();
 
-    //     $response->assertOk();
+        $first = Budget::first();
 
-    //     $first = Budget::first();
+        $addRequest = [
+            'food' => 5,
+            'fun' => 2,
+            'Vacation Savings' => 25
+        ];
 
-    //     $addRequest = [
-    //         'food' => 50,
-    //         'fun' => 25,
-    //         'Vacation Savings' => 10
-    //     ];
+        $this->post("budget/$first->id/add-row", $addRequest);
 
-    //     $this->post("budget/$first->id/add-row", $addRequest);
+        $response = $this->get("budget/$first->id/list-rows");
 
-    //     $response = $this->get("budget/$first->id/get-row");
+        $responseData = json_decode($response->content());
 
-    //     $responseData = json_decode($response->content());
+        $addedRow = reset($responseData);
 
-    //     $this->assertEquals($addRequest, (array) $responseData);
-    // }
+        $this->assertEquals($addRequest, (array) $addedRow);
+    }
 
 }
