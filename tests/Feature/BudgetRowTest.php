@@ -139,4 +139,43 @@ class BudgetRowTest extends TestCase
         $this->assertEquals($addRequest, (array) $addedRow);
     }
 
+    /**
+     * @test
+     * @dataProvider throughTenProvider
+     */
+    public function test_multiple_rows_can_be_added($runs)
+    {
+        $response = $this->post(BudgetTest::ADD_URL, BudgetTest::BASIC_ADD_REQUEST);
+
+        $response->assertOk();
+
+        $first = Budget::first();
+
+        $addRequest = [
+            'food' => 5,
+            'fun' => 2,
+            'Vacation Savings' => 25
+        ];
+
+        for ($i=0;$i<$runs;$i++) {
+            $this->post("budget/$first->id/add-row", $addRequest);
+        }
+
+        $this->assertCount($runs, BudgetRow::all());
+    }
+
+    public function throughTenProvider()
+    {
+        return $this->genArray(0, 10, 1);
+    }
+
+    private function genArray(int $start, int $end, int $inc)
+    {
+        $results = [];
+        for ($i=$start;$i<$end;$i+=$inc) {
+            $results[] = [$i];
+        }
+        return $results;
+    }
+
 }
