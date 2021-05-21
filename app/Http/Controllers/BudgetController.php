@@ -41,4 +41,11 @@ class BudgetController extends Controller
         return $budget->addRow(request()->all());
     }
 
+    public function listRows(int $budgetId)
+    {
+        $budget = new Budget($budgetId);
+
+        return $budget->listRows();
+    }
+
 }

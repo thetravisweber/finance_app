@@ -35,4 +35,9 @@ class Budget extends Model
         return $row->enter($data);
     }
 
+    public function listRows()
+    {
+        return 'heyo';
+    }
+
 }

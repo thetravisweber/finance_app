@@ -26,3 +26,4 @@ Route::post(BudgetController::API_DIRECTORY . '/{budget_id}/add-row', [BudgetCon
 
 /* GETTERS */
 Route::get(BudgetController::API_DIRECTORY . '/{budget_id}/get-goal', [BudgetController::class, 'getGoal']);
+Route::get(BudgetController::API_DIRECTORY . '/{budget_id}/list-rows', [BudgetController::class, 'listRows']);
