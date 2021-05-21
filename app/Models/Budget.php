@@ -37,7 +37,17 @@ class Budget extends Model
 
     public function listRows()
     {
-        return ['heyo'];
+        $results = [];
+        foreach ($this->rows as $row) {
+            $results[] = $row->getFormattedEntries();
+        }
+        return $results;
     }
+
+     // used to describe relationship for Eloquent ORM
+     public function rows() 
+     {
+         return $this->hasMany(BudgetRow::class);
+     }
 
 }
