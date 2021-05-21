@@ -20,6 +20,10 @@ class BudgetController extends Controller
         Budget::create($data);
     }
 
+
+    /**
+     *  SETTERS
+     */
     public function setGoal(int $budgetId)
     {
         $budget = new Budget($budgetId);
@@ -27,18 +31,22 @@ class BudgetController extends Controller
         return $budget->setGoal(request()->all());
     }
 
-    public function getGoal(int $budgetId)
-    {
-        $budget = new Budget($budgetId);
-
-        return $budget->getGoal();
-    }
-
     public function addRow(int $budgetId)
     {
         $budget = new Budget($budgetId);
 
         return $budget->addRow(request()->all());
+    }
+
+    /***
+     *  GETTERS
+     */
+
+    public function getGoal(int $budgetId)
+    {
+        $budget = new Budget($budgetId);
+
+        return $budget->getGoal();
     }
 
     public function listRows(int $budgetId)
