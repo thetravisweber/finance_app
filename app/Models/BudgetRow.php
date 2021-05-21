@@ -47,16 +47,15 @@ class BudgetRow extends Model
     public function getFormattedEntries()
     {
         $results = [];
-        foreach ($this->rows as $row) {
-            $results[$row['field']] = $row['value'];
+        foreach ($this->entries as $entry) {
+            $results[$entry['field']] = $entry['value'];
         }
         return $results;
     }
 
 
-
     // used to describe relationship for Eloquent ORM
-    public function rows() 
+    public function entries() 
     {
         return $this->hasMany(BudgetEntry::class);
     }
